@@ -1,0 +1,26 @@
+/* 
+  Localizable.strings
+  Deals
+
+  Created by Mohit on 07/11/17.
+  Copyright © 2017 Mohit Thakkar. All rights reserved.
+*/
+
+"My Profile" = "My Profile";
+"Browse" = "Browse";
+"Post" = "Post";
+"Chat" = "Chat";
+"Categories" = "Categories";
+"About" = "About";
+"Logout" = "Logout";
+
+"Country" = "Country";
+"City" = "City";
+
+"You are no longer continue this conversation" = "You are no longer continue this conversation";
+
+"No Producs found. \n Please Change your search criteria to see best products available on Deals" = "No Producs found. \n Please Change your search criteria to see best products available on Deals";
+
+"No notifications found. \n Please start selling/buying to get notifications" = "No notifications found.\n Please start selling/buying to get notifications";
+
+"No user has contact you.\n Please start selling to get response from other users" = "No user has contact you.\n Please start selling to get response from other users";

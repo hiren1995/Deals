@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  Deals
+
+  Created by Mohit on 07/11/17.
+  Copyright © 2017 Mohit Thakkar. All rights reserved.
+*/
+
+"My Profile" = "My Profile";
+"Browse" = "Browse";
+"Post" = "Post";
+"Chat" = "Chat";
+"Categories" = "Categories";
+"About" = "About";
+"Logout" = "Logout";

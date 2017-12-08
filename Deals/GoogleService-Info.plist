@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>957893179590-etd5bguj4mhqfg0khjaiqrlou6v9uopd.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.957893179590-etd5bguj4mhqfg0khjaiqrlou6v9uopd</string>
+	<key>API_KEY</key>
+	<string>AIzaSyApgAyaSVUjPypDW5CgJM5BQ-RFe1t7Luw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>957893179590</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.Deal.Deals</string>
+	<key>PROJECT_ID</key>
+	<string>deals-82708</string>
+	<key>STORAGE_BUCKET</key>
+	<string>deals-82708.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:957893179590:ios:d0fc5920f65e992a</string>
+	<key>DATABASE_URL</key>
+	<string>https://deals-82708.firebaseio.com</string>
+</dict>
+</plist>

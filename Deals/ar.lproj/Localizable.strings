@@ -1,0 +1,29 @@
+/* 
+  Localizable.strings
+  Deals
+
+  Created by Mohit on 07/11/17.
+  Copyright © 2017 Mohit Thakkar. All rights reserved.
+*/
+
+"My Profile" = "الصفحة الشخصية";
+"Browse" = "تصفح";
+"Post" = "بريد";
+"Chat" = "دردشة";
+"Categories" = "الاقسام";
+"About" = "حول";
+"Logout" = "الخروج";
+
+"Country"= "بلد";
+"City" = "مدينة";
+
+"You are no longer continue this conversation" = "لم تعد تتابع هذه المحادثة";
+
+"No Producs found. \n Please Change your search criteria to see best products available on Deals" = "لم يتم العثور على منتجات. يرجى تغيير معايير البحث لمعرفة أفضل المنتجات المتاحة على العروض";
+
+"No notifications found. \n Please start selling/buying to get notifications" = "لا يوجد تنبيهات, الرجاء البدء في البيع والشراء ليكون هناك تنبيهات";
+
+"No user has contact you.\nPlease start selling to get response from other users" = "لا يوجد أي مستخدم لديه اتصال بك. الرجاء بدء البيع للحصول على رد من مستخدمين آخرين.";
+
+
+
