@@ -75,6 +75,11 @@ class MyProfile: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     
     override func viewWillAppear(_ animated: Bool) {
         
+        
+        //print(otherUserRating.floatValue)
+        print(ownUserRating.floatValue)
+        print(dataArray)
+        
         dataCollection.isHidden = true
         self.getDatafromAPI()
         
@@ -154,6 +159,33 @@ class MyProfile: UIViewController, UICollectionViewDelegate, UICollectionViewDat
                         
                         self.dataArray = tempDic.object(forKey: "data") as! NSArray
                         print("data Array is:\(self.dataArray)")
+                        
+                        //let temp = self.dataArray[0]
+                        //print(temp.object(value(forKey: "rating")) as String)
+                        
+                        
+                        /*
+                        //--------------- code to display rating bar start ----------
+                        if self.ownUser{
+                            
+                            let ratingValue = temp. as? NSString
+                            
+                            if ratingValue == nil{
+                                self.ratingBar.value = 0.0
+                                
+                            }
+                            else{
+                                ratingBar.value = CGFloat((ratingValue?.floatValue)!)
+                                
+                                
+                            }
+                            
+                            //self.ratingBar.value = CGFloat(self.ownUserRating.floatValue)
+                            
+                        }
+                         */
+                        
+                        //--------------- code to display rating bar End ----------
                         
                         if self.dataArray.count > 0{
                             self.lblOwnSale.text = String(self.dataArray.count)

@@ -127,6 +127,7 @@ class PostDetails: UIViewController, UIScrollViewDelegate {
         }
         else{
             ratingBar.value = CGFloat((ratingValue?.floatValue)!)
+            
             lblRating.text = String(describing: CGFloat((ratingValue?.floatValue)!))
         }
         
