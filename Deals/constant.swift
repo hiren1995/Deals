@@ -16,9 +16,6 @@ let arBoard = UIStoryboard(name: "Main_Arabic", bundle: nil)
 
 var isArabic : Bool = false
 
-var reportFlag:Bool = false
-
-var reportUserFlag:Bool = false
 
  //Api
 

@@ -23,7 +23,7 @@
         <!--Reveal View Controller-->
         <scene sceneID="dPQ-kV-4Q0">
             <objects>
-                <viewController id="Jw2-2f-gxR" customClass="SWRevealViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SWRevealViewController" id="Jw2-2f-gxR" customClass="SWRevealViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VCX-c4-oHg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

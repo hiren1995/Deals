@@ -245,12 +245,6 @@ class ChatingScreen: JSQMessagesViewController, UINavigationControllerDelegate, 
         self.senderDisplayName = "Mohit"
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        if reportUserFlag
-        {
-            dismiss(animated: true, completion: nil)
-        }
-    }
     
     override func viewDidLayoutSubviews()
     {

@@ -100,18 +100,6 @@ class Reportitem: UIViewController,UITableViewDelegate,UITableViewDataSource {
         // Do any additional setup after loading the view.
     }
     
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        if reportFlag
-        {
-            
-            self.dismiss(animated: true, completion: nil)
-        }
-        
-        
-        
-    }
    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

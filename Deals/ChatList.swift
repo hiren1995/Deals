@@ -63,14 +63,7 @@ class ChatList: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     //MARK: - IBAction Methods
     
-    override func viewDidAppear(_ animated: Bool) {
-        if reportUserFlag
-        {
-            reportFlag = false
-            dismiss(animated: true, completion: nil)
-        }
-    }
-    
+   
     @IBAction func btnBack(_ sender: Any) {
         self.goToHome()
     }

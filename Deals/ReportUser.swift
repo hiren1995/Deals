@@ -93,13 +93,6 @@ class ReportUser: UIViewController,UITableViewDelegate,UITableViewDataSource {
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        if reportUserFlag
-        {
-            self.dismiss(animated: true, completion: nil)
-        }
-    }
-
     
     func HeaderViewModify()
     {

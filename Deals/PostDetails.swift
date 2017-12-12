@@ -148,15 +148,6 @@ class PostDetails: UIViewController, UIScrollViewDelegate {
     }
     
     
-    override func viewDidAppear(_ animated: Bool) {
-        if reportFlag
-        {
-            reportFlag = false
-            self.dismiss(animated: true, completion: nil)
-        }
-        
-    }
- 
     
     func setScrollView(){
         

@@ -206,9 +206,20 @@ class ReportUserDescription: UIViewController,UITextViewDelegate {
                     
                     if (strStatus.isEqual(to: "success")){
                         
-                        reportUserFlag = true
+                        //reportUserFlag = true
                         
-                        self.dismiss(animated: true, completion: nil)
+                        //self.dismiss(animated: true, completion: nil)
+                        
+                        var SBoard = UIStoryboard()
+                        if isArabic{
+                            SBoard = UIStoryboard(name: "Main_Arabic", bundle: nil)
+                        }
+                        else{
+                            SBoard = UIStoryboard(name: "Main", bundle: nil)
+                        }
+                        let SWRevealViewController = SBoard.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+                        
+                        self.present(SWRevealViewController, animated: true, completion: nil)
                     }
                 }
                 
