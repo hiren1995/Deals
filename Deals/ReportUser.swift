@@ -46,7 +46,10 @@ class ReportUser: UIViewController,UITableViewDelegate,UITableViewDataSource {
         
         if isArabic{
             
-            reasons = ["فقدوا اجتماعنا","ولم يردوا على الرسائل","باعوا لي شيئا مكسورا","وهي غير مناسبة","قد تكون مخادعة","قد تكون سرقت البنود الخاصة بهم"]
+            reasons = ["فقدوا اجتماعنا","ولم يردوا على الرسائل","باعوا لي شيئا مكسورا","وهي غير مناسبة","قد تكون مخادعة","قد تكون سرقت البنود الخاصة بهم","آخر"]
+            
+             tableView.contentInset = UIEdgeInsetsMake(0, 0 , 0, -7)
+      
             
             //---------------- code  for making only top left and bottom left corners round
             
@@ -59,6 +62,8 @@ class ReportUser: UIViewController,UITableViewDelegate,UITableViewDataSource {
         else
         {
             reasons = ["They missed our meeting","They did not respond to messages","They sold me something broken","They are inappropriate","They may be a scammer","Their items may be stolen","other"]
+            
+            tableView.contentInset = UIEdgeInsetsMake(0, -7, 0, 0)
             
             
             //---------------- code  for making only top left and bottom left corners round
@@ -74,7 +79,7 @@ class ReportUser: UIViewController,UITableViewDelegate,UITableViewDataSource {
         tableView.layer.borderColor = UIColor.lightGray.cgColor
         tableView.layer.borderWidth = 1
         tableView.layer.cornerRadius = 10
-        tableView.contentInset = UIEdgeInsetsMake(0, -7, 0, 0)
+        
         
         
         let placeholder = UIImage(named: "icon_profile_default")
