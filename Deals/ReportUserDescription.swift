@@ -1,8 +1,8 @@
 //
-//  ReportitemDescription.swift
+//  ReportUserDescription.swift
 //  Deals
 //
-//  Created by APPLE MAC MINI on 08/12/17.
+//  Created by APPLE MAC MINI on 11/12/17.
 //  Copyright © 2017 Mohit Thakkar. All rights reserved.
 //
 
@@ -10,34 +10,38 @@ import UIKit
 import AlamofireImage
 import Alamofire
 
-var Additional_reason:String? = nil
+var Additional_reasonForUser:String? = nil
 
+class ReportUserDescription: UIViewController,UITextViewDelegate {
 
-
-class ReportitemDescription: UIViewController,UITextViewDelegate {
-
-    
-    var itemUrl:String? = nil
-    
-    var dataArray = NSDictionary()
     
     @IBOutlet weak var NoteText: UITextView!
     
+    @IBOutlet weak var ReceiverImg: UIImageView!
+    
+    
     @IBOutlet weak var HeaderView: UIView!
     
+    @IBOutlet weak var btnBack1: UIButton!
+
+    @IBOutlet weak var btnback2: UIButton!
     
-    @IBOutlet weak var itemImg: UIImageView!
+    @IBOutlet weak var lblUserName: UILabel!
     
+    //variables for chatting list which we need to inilialize before going back....
     
-    @IBOutlet weak var lblItem: UILabel!
-    
-    
-    @IBOutlet weak var lblName: UILabel!
-    
+    var StrUserName = String()
+    var StrProductImg = String()
+    var StrPostId = String()
+    var StrOtherUserId = String()
+    var StrProductTitle = String()
+    var StrChatRandomID = String()
+    var StrIsBlock = String()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         
         if isArabic{
             
@@ -45,10 +49,10 @@ class ReportitemDescription: UIViewController,UITextViewDelegate {
             
             //---------------- code  for making only top left and bottom left corners round
             
-            let bezierpath = UIBezierPath(roundedRect: itemImg.bounds, byRoundingCorners: [.topRight,.bottomRight], cornerRadii: CGSize(width: 10, height: 10))
+            let bezierpath = UIBezierPath(roundedRect: ReceiverImg.bounds, byRoundingCorners: [.topRight,.bottomRight], cornerRadii: CGSize(width: 10, height: 10))
             let maskLayer = CAShapeLayer()
             maskLayer.path = bezierpath.cgPath
-            itemImg.layer.mask = maskLayer
+            ReceiverImg.layer.mask = maskLayer
             //------------------------------------------------------------------------------
             
         }
@@ -58,15 +62,15 @@ class ReportitemDescription: UIViewController,UITextViewDelegate {
             
             //---------------- code  for making only top left and bottom left corners round
             
-            let bezierpath = UIBezierPath(roundedRect: itemImg.bounds, byRoundingCorners: [.topLeft,.bottomLeft], cornerRadii: CGSize(width: 10, height: 10))
+            let bezierpath = UIBezierPath(roundedRect: ReceiverImg.bounds, byRoundingCorners: [.topLeft,.bottomLeft], cornerRadii: CGSize(width: 10, height: 10))
             let maskLayer = CAShapeLayer()
             maskLayer.path = bezierpath.cgPath
-            itemImg.layer.mask = maskLayer
+            ReceiverImg.layer.mask = maskLayer
             //------------------------------------------------------------------------------
         }
         
         HeaderViewModify()
-
+        
         //NoteText.text = "Please write your note here.."
         NoteText.textColor = UIColor.lightGray
         
@@ -76,36 +80,30 @@ class ReportitemDescription: UIViewController,UITextViewDelegate {
         
         self.addDoneButtonOnKeyboard()
         
-        // Do any additional setup after loading the view.
+        
+        btnBack1.addTarget(self, action: #selector(backFun), for: .touchUpInside)
         
         
-        let tempimgURL =  itemUrl
-        let ImageArr = tempimgURL?.components(separatedBy: ",")
-        let imgURL    = ImageArr?[0]
-        let ProfileUrl = postImageURL + imgURL!
-        
-        
-        print("Image URL:\(ProfileUrl)")
-        
-        let urlProfilePic = URL(string:ProfileUrl)
         let placeholder = UIImage(named: "icon_profile_default")
-        itemImg.af_setImage(
-            withURL: urlProfilePic!,
+        ReceiverImg.af_setImage(
+            withURL: ProfileURLReport!,
             placeholderImage: placeholder
         )
         
-        let tempTitle = dataArray.object(forKey: "post_title") as? String
-        lblItem.text = tempTitle?.decodeString
+        lblUserName.text = StrUserName
         
-        
-        lblName.text = dataArray.object(forKey: "full_name") as? String
-        
-       
+        // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func HeaderViewModify()
+    {
+        HeaderView.layer.shadowColor = UIColor.darkGray.cgColor
+        HeaderView.layer.shadowOpacity = 0.5
+        HeaderView.layer.shadowOffset = CGSize(width: 1, height: 1)
+        HeaderView.layer.shadowRadius = 1
+        
+        
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -141,24 +139,16 @@ class ReportitemDescription: UIViewController,UITextViewDelegate {
         
         
     }
+    
     func doneButtonAction()
     {
         self.NoteText.resignFirstResponder()
         
     }
     
-    func HeaderViewModify()
+   
+    func backFun()
     {
-        HeaderView.layer.shadowColor = UIColor.darkGray.cgColor
-        HeaderView.layer.shadowOpacity = 0.5
-        HeaderView.layer.shadowOffset = CGSize(width: 1, height: 1)
-        HeaderView.layer.shadowRadius = 1
-        
-        
-    }
-    
-    @IBAction func btnBackReport(_ sender: Any) {
-        
         var SBoard = UIStoryboard()
         if isArabic{
             SBoard = UIStoryboard(name: "Main_Arabic", bundle: nil)
@@ -166,45 +156,46 @@ class ReportitemDescription: UIViewController,UITextViewDelegate {
         else{
             SBoard = UIStoryboard(name: "Main", bundle: nil)
         }
-        let reportItem = SBoard.instantiateViewController(withIdentifier: "reportitem") as! Reportitem
-        reportItem.dataArray = dataArray
-        reportItem.itemUrl = itemUrl
-      
-        self.present(reportItem, animated: true, completion: nil);
+        let reportUser = SBoard.instantiateViewController(withIdentifier: "reportUser") as! ReportUser
+        
+        reportUser.StrUserName = StrUserName
+        reportUser.StrProductImg = StrProductImg
+        reportUser.StrPostId = StrPostId
+        reportUser.StrOtherUserId = StrOtherUserId
+        reportUser.StrProductTitle = StrProductTitle
+        reportUser.StrChatRandomID = StrChatRandomID
+        reportUser.StrIsBlock = StrIsBlock
+        
+        self.present(reportUser, animated: true, completion: nil);
     }
     
     
     @IBAction func btnDone(_ sender: Any) {
-    
-        Additional_reason = NoteText.text
+        
+        Additional_reasonForUser = NoteText.text
         
         NoteText.text = "Please write your note here.."
         NoteText.textColor = UIColor.lightGray
         
         reportThisPost()
-        
     }
-    
     func reportThisPost(){
         
         
         let tempUserid = udefault.value(forKey: MUserID) as! String
         let tempToken =  udefault.value(forKey: MUserToken) as! String
-        let tempPostId = dataArray.object(forKey: "post_id") as? String
-        
-        print(tempPostId)
-        
+       
         let parameters : Parameters = ["user_id" : tempUserid,
                                        "token" :tempToken,
-                                       "post_id" : tempPostId!,
-                                       "reason": Reason! ,
-                                       "additional_reason": Additional_reason!]
+                                       "chat_random_id" : StrChatRandomID,
+                                       "reason": UserBlockReason! ,
+                                       "additional_reason": Additional_reasonForUser!]
         
         print(parameters)
         
         let headers: HTTPHeaders = [ "Accept": "text/html", "Content-Type" : "application/x-www-form-urlencoded" ]
         
-        Alamofire.request(ReportPostAPI, method: .post, parameters: parameters, encoding: URLEncoding.httpBody, headers: headers).validate().responseJSON { (response:DataResponse<Any>) in
+        Alamofire.request(BlockUserAPI, method: .post, parameters: parameters, encoding: URLEncoding.httpBody, headers: headers).validate().responseJSON { (response:DataResponse<Any>) in
             
             switch(response.result) {
             case .success(_):
@@ -215,7 +206,7 @@ class ReportitemDescription: UIViewController,UITextViewDelegate {
                     
                     if (strStatus.isEqual(to: "success")){
                         
-                        reportFlag = true
+                        reportUserFlag = true
                         
                         self.dismiss(animated: true, completion: nil)
                     }
@@ -232,6 +223,13 @@ class ReportitemDescription: UIViewController,UITextViewDelegate {
         }
     }
     
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
     /*
     // MARK: - Navigation
 

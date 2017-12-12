@@ -10,6 +10,11 @@ import UIKit
 import Alamofire
 import MBProgressHUD
 
+var ProfileURLReport:URL? = nil     //for Report user Screens
+var ProdileNameReport:String? = nil //for Report user Screens
+var URLArray:[URL] = []
+var NamesArray:[String] = []
+
 class ChatList: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var dataArray = NSArray()
@@ -57,6 +62,14 @@ class ChatList: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     //MARK: - IBAction Methods
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if reportUserFlag
+        {
+            reportFlag = false
+            dismiss(animated: true, completion: nil)
+        }
+    }
     
     @IBAction func btnBack(_ sender: Any) {
         self.goToHome()
@@ -151,6 +164,10 @@ class ChatList: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let ProfileUrl = ProfileImageURL + tempimgURL!
         
         let urlProfilePic = URL(string:ProfileUrl)
+       
+        URLArray.append(urlProfilePic!) // for report screens
+        
+        
         let placeholder = UIImage(named: "icon_profile_default")
         cell.imgView.af_setImage(
             withURL: urlProfilePic!,
@@ -166,6 +183,9 @@ class ChatList: UIViewController, UITableViewDataSource, UITableViewDelegate {
        
         //UserName
         cell.lblName.text = ((self.dataArray as NSArray).object(at: indexPath.row) as AnyObject).value(forKey: "full_name") as? String
+        
+
+        
         //Title
         cell.lblTitle.text = ((self.dataArray as NSArray).object(at: indexPath.row) as AnyObject).value(forKey: "post_title") as? String
         
@@ -207,6 +227,9 @@ class ChatList: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        ProfileURLReport = URLArray[indexPath.row]
+        
         self.goToChatingScreen(indexPath.row)
     }
     
@@ -268,6 +291,7 @@ class ChatList: UIViewController, UITableViewDataSource, UITableViewDelegate {
         chatScreen.strChatRandomID = (((self.dataArray as NSArray).object(at: index) as AnyObject).value(forKey: "chat_random_id") as? String)!
         chatScreen.strIsBlock = (((self.dataArray as NSArray).object(at: index) as AnyObject).value(forKey: "is_block") as? String)!
         self.present(chatScreen, animated: true, completion: nil)
+        
     }
 
     override func didReceiveMemoryWarning() {

@@ -140,7 +140,7 @@ class ChatingScreen: JSQMessagesViewController, UINavigationControllerDelegate, 
             
             //let pointX = UIScreen.main.bounds.width - 30
             let btnBlock = UIButton(frame: CGRect(x: 10, y: 30.0, width: 20, height: 20))
-            btnBlock.setBackgroundImage(UIImage(named:"blockUser"), for: .normal)
+            btnBlock.setBackgroundImage(UIImage(named:"report"), for: .normal)
             btnBlock.addTarget(self, action: #selector(self.blockUserClicked(_:)), for: UIControlEvents.touchUpInside)
             
             let pointX = UIScreen.main.bounds.width - 30
@@ -183,7 +183,7 @@ class ChatingScreen: JSQMessagesViewController, UINavigationControllerDelegate, 
             
             let pointX = UIScreen.main.bounds.width - 30
             let btnBlock = UIButton(frame: CGRect(x: pointX, y: 30.0, width: 20, height: 20))
-            btnBlock.setBackgroundImage(UIImage(named:"blockUser"), for: .normal)
+            btnBlock.setBackgroundImage(UIImage(named:"report"), for: .normal)
             btnBlock.addTarget(self, action: #selector(self.blockUserClicked(_:)), for: UIControlEvents.touchUpInside)
             
             let btnLeftMenu: UIButton = UIButton()
@@ -245,6 +245,13 @@ class ChatingScreen: JSQMessagesViewController, UINavigationControllerDelegate, 
         self.senderDisplayName = "Mohit"
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if reportUserFlag
+        {
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
     override func viewDidLayoutSubviews()
     {
         let rect = cusView.frame
@@ -260,6 +267,8 @@ class ChatingScreen: JSQMessagesViewController, UINavigationControllerDelegate, 
     
     @IBAction func blockUserClicked(_ sender: Any) {
         
+        /*
+        
         let alert = UIAlertController(title: "Deals", message: "Are you sure you wants to Block this User?", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
             
@@ -270,6 +279,28 @@ class ChatingScreen: JSQMessagesViewController, UINavigationControllerDelegate, 
         alert.addAction(yesAction)
         alert.addAction(noAction)
         self.present(alert, animated: true, completion: nil)
+        */
+        
+        
+        var SBoard = UIStoryboard()
+        if isArabic{
+            SBoard = UIStoryboard(name: "Main_Arabic", bundle: nil)
+        }
+        else{
+            SBoard = UIStoryboard(name: "Main", bundle: nil)
+        }
+        let reportUser = SBoard.instantiateViewController(withIdentifier: "reportUser") as! ReportUser
+        
+        reportUser.StrUserName = strUserName
+        reportUser.StrProductImg = strproductImg
+        reportUser.StrPostId = strPostId
+        reportUser.StrOtherUserId = strotherUserId
+        reportUser.StrProductTitle = strProductTitle
+        reportUser.StrChatRandomID = strChatRandomID
+        reportUser.StrIsBlock = strIsBlock
+        
+        
+        self.present(reportUser, animated: true, completion: nil);
     }
     
     func blockThisUser(){

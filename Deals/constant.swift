@@ -18,6 +18,8 @@ var isArabic : Bool = false
 
 var reportFlag:Bool = false
 
+var reportUserFlag:Bool = false
+
  //Api
 
 var Baseurl = "http://deal4ya.com/api"

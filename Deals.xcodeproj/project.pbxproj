@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2D8F4B941FC59D1700293E8A /* assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D8F4B931FC59D1600293E8A /* assets.xcassets */; };
+		2D9A7B471FDE807B0069A2E2 /* ReportUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9A7B461FDE807A0069A2E2 /* ReportUser.swift */; };
+		2D9A7B491FDE80AD0069A2E2 /* ReportUserDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9A7B481FDE80AD0069A2E2 /* ReportUserDescription.swift */; };
 		2D9F7BC31FC80E14007A1776 /* ChatingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F7BC21FC80E13007A1776 /* ChatingScreen.swift */; };
 		2DD2C7551FC6E7B700639B43 /* alert.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2DD2C7541FC6E7B600639B43 /* alert.mp3 */; };
 		2DD2C7571FC6E9A900639B43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD2C7561FC6E9A900639B43 /* AppDelegate.swift */; };
@@ -83,6 +85,8 @@
 		239DE53EBFB48F0302F03A2D /* Pods-Deals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Deals.release.xcconfig"; path = "Pods/Target Support Files/Pods-Deals/Pods-Deals.release.xcconfig"; sourceTree = "<group>"; };
 		26A223DAFF4EF1A9C880E989 /* Pods-DealsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DealsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DealsUITests/Pods-DealsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2D8F4B931FC59D1600293E8A /* assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = assets.xcassets; sourceTree = "<group>"; };
+		2D9A7B461FDE807A0069A2E2 /* ReportUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUser.swift; sourceTree = "<group>"; };
+		2D9A7B481FDE80AD0069A2E2 /* ReportUserDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserDescription.swift; sourceTree = "<group>"; };
 		2D9F7BC21FC80E13007A1776 /* ChatingScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatingScreen.swift; sourceTree = "<group>"; };
 		2DD2C7541FC6E7B600639B43 /* alert.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alert.mp3; sourceTree = "<group>"; };
 		2DD2C7561FC6E9A900639B43 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -274,6 +278,8 @@
 				E447110C1FB0D6E4001D1D3C /* ImageShow.swift */,
 				2DD47C6B1FDA6680009735D4 /* Reportitem.swift */,
 				2DD47C6D1FDA9F51009735D4 /* ReportitemDescription.swift */,
+				2D9A7B461FDE807A0069A2E2 /* ReportUser.swift */,
+				2D9A7B481FDE80AD0069A2E2 /* ReportUserDescription.swift */,
 				E447112B1FB0E4A8001D1D3C /* Localizable.strings */,
 				2DD2C7541FC6E7B600639B43 /* alert.mp3 */,
 				442C8A091FB079AD0047B070 /* Main_Arabic.storyboard */,
@@ -685,6 +691,7 @@
 			files = (
 				E478C5F21F7E8EF600EAAA26 /* MenuView.swift in Sources */,
 				2D9F7BC31FC80E14007A1776 /* ChatingScreen.swift in Sources */,
+				2D9A7B471FDE807B0069A2E2 /* ReportUser.swift in Sources */,
 				2DD2C75B1FC6E9E900639B43 /* ChatList.swift in Sources */,
 				E488D37B1F8962E200E270FF /* About.swift in Sources */,
 				E4F040591F8FB89E00E75FE8 /* UpdateProfile.swift in Sources */,
@@ -702,6 +709,7 @@
 				4424904E1FA98F960060A640 /* MarkAsSold.swift in Sources */,
 				E488D3341F72E7E000523E25 /* SignUp.swift in Sources */,
 				442490521FA9D7960060A640 /* RateBuyer.swift in Sources */,
+				2D9A7B491FDE80AD0069A2E2 /* ReportUserDescription.swift in Sources */,
 				E4F737E11F88C3B100403BFF /* constant.swift in Sources */,
 				440A0F911FA3477300A95ED1 /* Notifications.swift in Sources */,
 				E4F737E21F88C3B100403BFF /* customclass.swift in Sources */,

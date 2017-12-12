@@ -26,14 +26,46 @@ class Reportitem: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var HeaderView: UIView!
     
-    let reasons=["It's prohibited on Deals","It's offensive to me","It's not Real Post","It's a duplicate post","It's in wrong Category","It may be a scam","It may be a stolen","other"]
+    
+    var reasons:[String]? = nil
+    
+    //let reasons=["It's prohibited on Deals","It's offensive to me","It's not Real Post","It's a duplicate post","It's in wrong Category","It may be a scam","It may be a stolen","other"]
  
+    
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        if isArabic{
+            
+            reasons = ["يحظر على العروض","انها مسيئة بالنسبة لي","انها ليست وظيفة حقيقية","إنها مشاركة مكررة","هو في فئة خاطئة","قد يكون عملية احتيال","قد تكون مسروقة","آخر"]
+            
+            //---------------- code  for making only top left and bottom left corners round
+            
+            let bezierpath = UIBezierPath(roundedRect: itemImg.bounds, byRoundingCorners: [.topRight,.bottomRight], cornerRadii: CGSize(width: 10, height: 10))
+            let maskLayer = CAShapeLayer()
+            maskLayer.path = bezierpath.cgPath
+            itemImg.layer.mask = maskLayer
+            //------------------------------------------------------------------------------
+        }
+        else
+        {
+            reasons = ["It's prohibited on Deals","It's offensive to me","It's not Real Post","It's a duplicate post","It's in wrong Category","It may be a scam","It may be a stolen","other"]
+            
+            
+            //---------------- code  for making only top left and bottom left corners round
+            
+            let bezierpath = UIBezierPath(roundedRect: itemImg.bounds, byRoundingCorners: [.topLeft,.bottomLeft], cornerRadii: CGSize(width: 10, height: 10))
+            let maskLayer = CAShapeLayer()
+            maskLayer.path = bezierpath.cgPath
+            itemImg.layer.mask = maskLayer
+            //------------------------------------------------------------------------------
+        }
+        
+        
         
         HeaderViewModify()
         
@@ -63,17 +95,7 @@ class Reportitem: UIViewController,UITableViewDelegate,UITableViewDataSource {
         let tempTitle = dataArray.object(forKey: "post_title") as? String
         lblItem.text = tempTitle?.decodeString
         
-        
         lblName.text = dataArray.object(forKey: "full_name") as? String
-        
-        
-        //---------------- code  for making only top left and bottom left corners round
-        
-        let bezierpath = UIBezierPath(roundedRect: itemImg.bounds, byRoundingCorners: [.topLeft,.bottomLeft], cornerRadii: CGSize(width: 10, height: 10))
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = bezierpath.cgPath
-        itemImg.layer.mask = maskLayer
-        //------------------------------------------------------------------------------
         
         // Do any additional setup after loading the view.
     }
@@ -128,7 +150,7 @@ class Reportitem: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return reasons.count
+        return reasons!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -138,7 +160,7 @@ class Reportitem: UIViewController,UITableViewDelegate,UITableViewDataSource {
         
       
         
-        ReasonCell.textLabel?.text = reasons[indexPath.row]
+        ReasonCell.textLabel?.text = reasons?[indexPath.row]
         
         
         
@@ -146,7 +168,7 @@ class Reportitem: UIViewController,UITableViewDelegate,UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        Reason = reasons[indexPath.row]
+        Reason = reasons?[indexPath.row]
         
         
         var SBoard = UIStoryboard()
