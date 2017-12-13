@@ -96,6 +96,19 @@ class Login: UIViewController, UITextFieldDelegate {
                             let tempLat = tempDic.value(forKey: "latitude")
                             let tempLongi = tempDic.value(forKey: "longitude")
                             
+                            
+                            
+                            if tempDic.value(forKey: "rating") is NSNull
+                            {
+                                
+                                udefault.set(nil, forKey: "OwnUserRatingMenuView")
+                            }
+                            else
+                            {
+                                udefault.set(tempDic.value(forKey: "rating"), forKey: "OwnUserRatingMenuView")
+                                
+                            }
+                            
                             udefault.setValue(tempuserid, forKey: MUserID)
                             udefault.setValue(tempToken, forKey: MUserToken)
                             udefault.setValue(tempEmail, forKey: MUserEmail)
@@ -252,8 +265,11 @@ class Login: UIViewController, UITextFieldDelegate {
                                 
                                 let dataDic = response.result.value as! NSDictionary
                                 print("Login Response is:\(dataDic)")
+                               
+                                
                                 
                                 let strStatus = NSString(string: dataDic["status"] as! String)
+                                
                                 
                                 if (strStatus.isEqual(to: "success"))
                                 {
@@ -267,6 +283,20 @@ class Login: UIViewController, UITextFieldDelegate {
                                     let tempProfile = tempDic.value(forKey: "profile_pic")
                                     let tempLat = tempDic.value(forKey: "latitude")
                                     let tempLongi = tempDic.value(forKey: "longitude")
+                                    
+                                    
+                                    if tempDic.value(forKey: "rating") is NSNull
+                                    {
+                                        
+                                       udefault.set(nil, forKey: "OwnUserRatingMenuView")
+                                    }
+                                    else
+                                    {
+                                        udefault.set(tempDic.value(forKey: "rating"), forKey: "OwnUserRatingMenuView")
+                                        
+                                    }
+                                    
+                                    
                                     
                                     udefault.setValue(tempuserid, forKey: MUserID)
                                     udefault.setValue(tempToken, forKey: MUserToken)

@@ -117,7 +117,15 @@ class ReportitemDescription: UIViewController,UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if NoteText.text.isEmpty
         {
-            NoteText.text = "Please write your note here.."
+            if isArabic{
+                
+                NoteText.text = "يرجى كتابة ملاحظتك هنا ..."
+            }
+            else
+            {
+                NoteText.text = "Please write your note here.."
+            }
+            
             NoteText.textColor = UIColor.lightGray
         }
     }
@@ -178,7 +186,14 @@ class ReportitemDescription: UIViewController,UITextViewDelegate {
     
         Additional_reason = NoteText.text
         
-        NoteText.text = "Please write your note here.."
+        if isArabic{
+            
+            NoteText.text = "يرجى كتابة ملاحظتك هنا ..."
+        }
+        else
+        {
+            NoteText.text = "Please write your note here.."
+        }
         NoteText.textColor = UIColor.lightGray
         
         reportThisPost()

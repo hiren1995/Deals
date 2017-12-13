@@ -99,6 +99,7 @@ class MyProfile: UIViewController, UICollectionViewDelegate, UICollectionViewDat
                 placeholderImage: nil
             )
             ratingBar.value = CGFloat(ownUserRating.floatValue)
+            
             editButton.isHidden = false
             ownSaleView.isHidden = false
             userSaleView.isHidden = true
@@ -116,12 +117,32 @@ class MyProfile: UIViewController, UICollectionViewDelegate, UICollectionViewDat
                 placeholderImage: nil
             )
             ratingBar.value = CGFloat(otherUserRating.floatValue)
+            
             editButton.isHidden = true
             ownSaleView.isHidden = true
             userSaleView.isHidden = false
             addPostView.isHidden = true
         }
     }
+    
+    /*
+    override func viewDidAppear(_ animated: Bool) {
+        
+        
+        if ownUser{
+            
+            print(ownUserRating)
+            
+            ratingBar.value = CGFloat(ownUserRating.floatValue)
+           
+         }
+         else{
+            ratingBar.value = CGFloat(otherUserRating.floatValue)
+        }
+ 
+    }
+ 
+ */
     
     func hideViewAction(sender : UITapGestureRecognizer) {
         self.viewDeleteMarkSold.isHidden = true
@@ -160,33 +181,39 @@ class MyProfile: UIViewController, UICollectionViewDelegate, UICollectionViewDat
                         self.dataArray = tempDic.object(forKey: "data") as! NSArray
                         print("data Array is:\(self.dataArray)")
                         
-                        //let temp = self.dataArray[0]
-                        //print(temp.object(value(forKey: "rating")) as String)
-                        
-                        
+                       
                         /*
+                        
                         //--------------- code to display rating bar start ----------
+                         let temp = self.dataArray[0] as! NSDictionary
+                         print(temp.value(forKey: "rating"))
+                         
                         if self.ownUser{
                             
-                            let ratingValue = temp. as? NSString
+                            let ratingValue = temp.value(forKey: "rating") as? NSString
+                            
+                            print(ratingValue)
                             
                             if ratingValue == nil{
                                 self.ratingBar.value = 0.0
-                                
+                                self.ownUserRating = ratingValue!
                             }
                             else{
-                                ratingBar.value = CGFloat((ratingValue?.floatValue)!)
-                                
+                         
+                            self.ratingBar.value = CGFloat((ratingValue?.floatValue)!)
+                                self.ownUserRating = ratingValue!
+                                print(self.ownUserRating)
                                 
                             }
-                            
-                            //self.ratingBar.value = CGFloat(self.ownUserRating.floatValue)
+                          
                             
                         }
-                         */
+ 
                         
                         //--------------- code to display rating bar End ----------
-                        
+                         
+                         */
+ 
                         if self.dataArray.count > 0{
                             self.lblOwnSale.text = String(self.dataArray.count)
                             self.lblUserSale.text = String(self.dataArray.count)

@@ -9,6 +9,8 @@
 import UIKit
 import AlamofireImage
 
+
+
 class MenuView: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var lblCity: UILabel!
@@ -89,6 +91,27 @@ class MenuView: UIViewController, UITableViewDataSource, UITableViewDelegate {
             let myProfile = SBoard.instantiateViewController(withIdentifier: "myProfile") as! MyProfile
             myProfile.ownUser = true
             myProfile.otherUserId = udefault.value(forKey: MUserID) as! NSString
+            
+            
+            var tempRating:NSString? = nil
+            
+            if(udefault.value(forKey: "OwnUserRatingMenuView") != nil)
+            {
+                tempRating = udefault.value(forKey: "OwnUserRatingMenuView") as! NSString
+            }
+            
+            print(tempRating)
+            
+           
+            if tempRating == nil{
+                myProfile.ownUserRating = "0"
+            }
+            else{
+                myProfile.ownUserRating = tempRating!
+            }
+            
+            
+                
             self.present(myProfile, animated: true, completion: nil)
         }
         else if indexPath.row == 1{

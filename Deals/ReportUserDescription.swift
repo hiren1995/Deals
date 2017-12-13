@@ -115,7 +115,14 @@ class ReportUserDescription: UIViewController,UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if NoteText.text.isEmpty
         {
-            NoteText.text = "Please write your note here.."
+            if isArabic{
+                
+                NoteText.text = "يرجى كتابة ملاحظتك هنا ..."
+            }
+            else
+            {
+                NoteText.text = "Please write your note here.."
+            }
             NoteText.textColor = UIColor.lightGray
         }
     }
@@ -174,7 +181,14 @@ class ReportUserDescription: UIViewController,UITextViewDelegate {
         
         Additional_reasonForUser = NoteText.text
         
-        NoteText.text = "Please write your note here.."
+        if isArabic{
+            
+            NoteText.text = "يرجى كتابة ملاحظتك هنا ..."
+        }
+        else
+        {
+            NoteText.text = "Please write your note here.."
+        }
         NoteText.textColor = UIColor.lightGray
         
         reportThisPost()

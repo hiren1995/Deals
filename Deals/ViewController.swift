@@ -251,6 +251,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
                             self.lblNoProduct.isHidden = true
                             self.dataCollection.isHidden = false
                             self.dataCollection.reloadData()
+                            
+                           
                         }
                         else{
                             self.lblNoProduct.isHidden = false
