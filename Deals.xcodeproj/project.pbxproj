@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D0E73EB1FE2627000A57E09 /* MapPlacePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0E73EA1FE2627000A57E09 /* MapPlacePicker.swift */; };
 		2D8F4B941FC59D1700293E8A /* assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D8F4B931FC59D1600293E8A /* assets.xcassets */; };
 		2D9A7B471FDE807B0069A2E2 /* ReportUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9A7B461FDE807A0069A2E2 /* ReportUser.swift */; };
 		2D9A7B491FDE80AD0069A2E2 /* ReportUserDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9A7B481FDE80AD0069A2E2 /* ReportUserDescription.swift */; };
@@ -84,6 +85,7 @@
 		0DFF6CD624C0B7839520F490 /* Pods_Deals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Deals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		239DE53EBFB48F0302F03A2D /* Pods-Deals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Deals.release.xcconfig"; path = "Pods/Target Support Files/Pods-Deals/Pods-Deals.release.xcconfig"; sourceTree = "<group>"; };
 		26A223DAFF4EF1A9C880E989 /* Pods-DealsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DealsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DealsUITests/Pods-DealsUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		2D0E73EA1FE2627000A57E09 /* MapPlacePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPlacePicker.swift; sourceTree = "<group>"; };
 		2D8F4B931FC59D1600293E8A /* assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = assets.xcassets; sourceTree = "<group>"; };
 		2D9A7B461FDE807A0069A2E2 /* ReportUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUser.swift; sourceTree = "<group>"; };
 		2D9A7B481FDE80AD0069A2E2 /* ReportUserDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserDescription.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				2DD47C6D1FDA9F51009735D4 /* ReportitemDescription.swift */,
 				2D9A7B461FDE807A0069A2E2 /* ReportUser.swift */,
 				2D9A7B481FDE80AD0069A2E2 /* ReportUserDescription.swift */,
+				2D0E73EA1FE2627000A57E09 /* MapPlacePicker.swift */,
 				E447112B1FB0E4A8001D1D3C /* Localizable.strings */,
 				2DD2C7541FC6E7B600639B43 /* alert.mp3 */,
 				442C8A091FB079AD0047B070 /* Main_Arabic.storyboard */,
@@ -562,9 +565,13 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Deals/Pods-Deals-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -693,6 +700,7 @@
 				2D9F7BC31FC80E14007A1776 /* ChatingScreen.swift in Sources */,
 				2D9A7B471FDE807B0069A2E2 /* ReportUser.swift in Sources */,
 				2DD2C75B1FC6E9E900639B43 /* ChatList.swift in Sources */,
+				2D0E73EB1FE2627000A57E09 /* MapPlacePicker.swift in Sources */,
 				E488D37B1F8962E200E270FF /* About.swift in Sources */,
 				E4F040591F8FB89E00E75FE8 /* UpdateProfile.swift in Sources */,
 				E488D3301F72E7C000523E25 /* SelectLanguage.swift in Sources */,

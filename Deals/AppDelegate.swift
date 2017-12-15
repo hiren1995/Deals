@@ -13,12 +13,15 @@ import FBSDKLoginKit
 import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
-
+import GoogleMaps
+import GooglePlaces
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
 
+    
+    
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
     var arrMessageIDs = [Any]()
@@ -26,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
     
+        GMSServices.provideAPIKey("AIzaSyCIDNIaKIzmR_UnzvBhJje8IHbiGCJKQII")
+        
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         for family in UIFont.familyNames {
             let sName: String = family as String

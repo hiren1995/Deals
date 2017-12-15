@@ -5,6 +5,9 @@ target 'Deals' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
+pod 'GoogleMaps'
+pod 'GooglePlaces'
+
 pod 'Alamofire'
 pod 'MBProgressHUD'
 pod 'AlamofireImage'
@@ -15,6 +18,8 @@ pod 'JSQMessagesViewController'
 pod 'Firebase/Core'
 pod 'Firebase/Messaging'
 pod 'PinterestLayout'
+
+
 
 
   # Pods for Deals
