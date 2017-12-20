@@ -14,11 +14,15 @@ import FacebookLogin
 import FBSDKCoreKit
 import FBSDKLoginKit
 
+
+
 class Login: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var textPassword: UITextField!
     @IBOutlet weak var textEmail: UITextField!
     @IBOutlet weak var btnFacebook: UIButton!
+    
+   // var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +31,10 @@ class Login: UIViewController, UITextFieldDelegate {
         textPassword.setPlaceHolderColor()
         
         btnFacebook.addTarget(self, action: #selector(self.loginFacebookAction), for: UIControlEvents.touchUpInside)
+        
     }
     
     //MARK: - IBAction Methods
-    
     
     @IBAction func btnLogin(_ sender: Any) {
         
@@ -59,7 +63,9 @@ class Login: UIViewController, UITextFieldDelegate {
             let parameters : Parameters = [SEmail:self.textEmail.text!,
                                            SPassword:self.textPassword.text!,
                                            SDeviceType:"2",
-                                           SToken:deviceToken]
+                                           SToken:deviceToken,
+                                           "latitude" : tempLatitude!,
+                                           "longitude" : tempLongitude!]
             
             print("Login Parameters are:\(parameters)")
             
@@ -93,8 +99,12 @@ class Login: UIViewController, UITextFieldDelegate {
                             let tempEmail = tempDic.value(forKey: "email")
                             let tempName = tempDic.value(forKey: "full_name")
                             let tempProfile = tempDic.value(forKey: "profile_pic")
+                            
                             let tempLat = tempDic.value(forKey: "latitude")
                             let tempLongi = tempDic.value(forKey: "longitude")
+                            
+                            //let tempLat = tempDic.value(forKey: "latitude")
+                            //let tempLongi = tempDic.value(forKey: "longitude")
                             
                             
                             
@@ -114,8 +124,13 @@ class Login: UIViewController, UITextFieldDelegate {
                             udefault.setValue(tempEmail, forKey: MUserEmail)
                             udefault.setValue(tempName, forKey: MUserName)
                             udefault.setValue(tempProfile, forKey: "ProfilePic")
-                            udefault.setValue(tempLat, forKey: "UserLat")
-                            udefault.setValue(tempLongi, forKey: "UserLongi")
+                            
+                            udefault.setValue(tempLatitude, forKey: "UserLat")
+                            udefault.setValue(tempLongitude, forKey: "UserLongi")
+                            
+                            //udefault.setValue(tempLat, forKey: "UserLat")
+                            //udefault.setValue(tempLongi, forKey: "UserLongi")
+                            
                             udefault.set(true, forKey: "Login")
                             
                             //Select Country & City screen
@@ -128,8 +143,18 @@ class Login: UIViewController, UITextFieldDelegate {
                                 SBoard = UIStoryboard(name: "Main", bundle: nil)
                             }
                             
-                            let countryCityView = SBoard.instantiateViewController(withIdentifier: "SelCountryCity")
-                            self.present(countryCityView, animated: true, completion: nil)
+                            
+                            let SWRevealViewController = SBoard.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+                            self.present(SWRevealViewController, animated: true, completion: nil)
+                           
+                            //let mapPlacePicker = SBoard.instantiateViewController(withIdentifier: "mapPlacePicker") as! MapPlacePicker
+                            //self.present(mapPlacePicker, animated: true, completion: nil)
+                           
+                            
+                            //let countryCityView = SBoard.instantiateViewController(withIdentifier: "SelCountryCity")
+                            //self.present(countryCityView, animated: true, completion: nil)
+                            
+                            
                         }
                         else{
                             let strMsg = NSString(string: dataDic["msg"] as! String)
@@ -245,8 +270,8 @@ class Login: UIViewController, UITextFieldDelegate {
                     let parameters : Parameters = [SEmail:info["email"] as! String,
                                                    SUserName : info["name"] as! String,
                                                    "fb_id" : info["id"] as! String ,
-                                                   "latitude" : "0.000000",
-                                                   "longitude" : "0.00000",
+                                                   "latitude" : tempLatitude!,
+                                                   "longitude" : tempLongitude!,
                                                    SDeviceType:"2",
                                                    SToken:deviceToken]
                     
@@ -281,8 +306,10 @@ class Login: UIViewController, UITextFieldDelegate {
                                     let tempEmail = tempDic.value(forKey: "email")
                                     let tempName = tempDic.value(forKey: "full_name")
                                     let tempProfile = tempDic.value(forKey: "profile_pic")
-                                    let tempLat = tempDic.value(forKey: "latitude")
-                                    let tempLongi = tempDic.value(forKey: "longitude")
+                                    
+                                    
+                                    //let tempLat = tempDic.value(forKey: "latitude")
+                                    //let tempLongi = tempDic.value(forKey: "longitude")
                                     
                                     
                                     if tempDic.value(forKey: "rating") is NSNull
@@ -303,8 +330,14 @@ class Login: UIViewController, UITextFieldDelegate {
                                     udefault.setValue(tempEmail, forKey: MUserEmail)
                                     udefault.setValue(tempName, forKey: MUserName)
                                     udefault.setValue(tempProfile, forKey: "ProfilePic")
-                                    udefault.setValue(tempLat, forKey: "UserLat")
-                                    udefault.setValue(tempLongi, forKey: "UserLongi")
+                                    
+                                    
+                                    udefault.setValue(tempLatitude, forKey: "UserLat")
+                                    udefault.setValue(tempLongitude, forKey: "UserLongi")
+                                    
+                                    //udefault.setValue(tempLat, forKey: "UserLat")
+                                    //udefault.setValue(tempLongi, forKey: "UserLongi")
+                                    
                                     udefault.set(true, forKey: "Login")
                                     
                                     //Select Country & City screen
@@ -317,8 +350,14 @@ class Login: UIViewController, UITextFieldDelegate {
                                         SBoard = UIStoryboard(name: "Main", bundle: nil)
                                     }
                                     
-                                    let countryCityView = SBoard.instantiateViewController(withIdentifier: "SelCountryCity")
-                                    self.present(countryCityView, animated: true, completion: nil)
+                                    let SWRevealViewController = SBoard.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+                                    self.present(SWRevealViewController, animated: true, completion: nil)
+                                    
+                                    //let countryCityView = SBoard.instantiateViewController(withIdentifier: "SelCountryCity")
+                                    //self.present(countryCityView, animated: true, completion: nil)
+                                    
+                                    //let mapPlacePicker = SBoard.instantiateViewController(withIdentifier: "mapPlacePicker") as! MapPlacePicker
+                                    //self.present(mapPlacePicker, animated: true, completion: nil)
                                 }
                                 else{
                                     let strMsg = NSString(string: dataDic["msg"] as! String)

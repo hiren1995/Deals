@@ -17,16 +17,23 @@ import GoogleMaps
 import GooglePlaces
 
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
+var tempLatitude:Double?
+var tempLongitude:Double?
 
-    
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate,CLLocationManagerDelegate {
+
+    var locationManager = CLLocationManager()
     
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
     var arrMessageIDs = [Any]()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        getLatLong()
+        
+        
         // Override point for customization after application launch.
     
         GMSServices.provideAPIKey("AIzaSyCIDNIaKIzmR_UnzvBhJje8IHbiGCJKQII")
@@ -338,6 +345,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool{
         return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
+    
+    func getLatLong()
+    {
+        
+        
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+        
+        
+        let x = locationManager.location
+        print(x?.coordinate.latitude)
+        print(x?.coordinate.longitude)
+        
+        tempLatitude = x?.coordinate.latitude
+        tempLongitude = x?.coordinate.longitude
+        
+        
+    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let mylocation = locations.last
+        
+        
+        //mylocation!.coordinate.latitude, mylocation!.coordinate.longitude
+        
+        tempLatitude = mylocation!.coordinate.latitude.magnitude
+        tempLongitude = mylocation!.coordinate.longitude.magnitude
+        
+        print(tempLatitude)
+        print(tempLongitude)
+        
+        locationManager.stopUpdatingLocation()
+    }
+    
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -9,6 +9,16 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import Alamofire
+import AlamofireImage
+import MBProgressHUD
+
+var latitude_global:Double? = nil
+var longitude_global:Double? = nil
+var country_global:String? = nil
+var city_global:String? = nil
+var radius_global:Int = 1
+
 
 extension GMSCircle {
     func bounds () -> GMSCoordinateBounds {
@@ -37,21 +47,29 @@ class MapPlacePicker: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     
     @IBOutlet var DistanceSelectorView: UIView!
     
+    
+    @IBOutlet var btnCancel: UIButton!
+    
+    
+    @IBOutlet var btnBack: UIButton!
+    
+    @IBOutlet weak var btnGPSlocation: UIButton!
+    
     //var mapView: GMSMapView!
+    
    
     @IBOutlet var distancelabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        btnCancel.layer.borderWidth = 1
+        btnCancel.layer.borderColor = UIColor(red: 73/255, green: 172/255, blue: 77/255, alpha: 1.0).cgColor
+
+        btnCancel.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        btnBack.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         
-        
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
-        
-        locationManager.stopUpdatingLocation()
+        btnGPSlocation.addTarget(self, action: #selector(curreentLocation), for: .touchUpInside)
         
         //Mapview.camera = GMSCameraPosition.camera(withLatitude: -33.86,longitude: 151.20, zoom: 18)
         //Mapview.isMyLocationEnabled = true
@@ -111,6 +129,23 @@ class MapPlacePicker: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        
+        curreentLocation()
+    }
+    
+    func curreentLocation()
+    {
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+        
+        locationManager.stopUpdatingLocation()
+        
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         let mylocation = locations.last
@@ -118,6 +153,8 @@ class MapPlacePicker: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         Mapview.camera = GMSCameraPosition.camera(withLatitude: mylocation!.coordinate.latitude,longitude: mylocation!.coordinate.longitude, zoom: 18)
         Mapview.isMyLocationEnabled = true
         Mapview.delegate = self
+        
+        
         
         print(sliderView.value)
         
@@ -128,17 +165,19 @@ class MapPlacePicker: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         
     }
     
+    
+    
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         
         //Mapview.clear()
         
         print("\(position.target.latitude) \(position.target.longitude)")
         
+        getAreaDetails(lat: position.target.latitude,long: position.target.longitude)
+        
         cirlce.position = position.target
        
-        //let marker = GMSMarker()
-        //marker.position = CLLocationCoordinate2D(latitude: position.target.latitude, longitude: position.target.longitude)
-        //marker.map = Mapview
+        
     }
 
     
@@ -148,7 +187,16 @@ class MapPlacePicker: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         
         var currentvalue = Int(sender.value)
         
-        distancelabel.text =  "\(currentvalue) miles"
+        radius_global = currentvalue
+        
+        if isArabic
+        {
+            distancelabel.text =  "ميل\(currentvalue)"
+        }
+        else{
+            distancelabel.text =  "\(currentvalue) miles"
+        }
+        
         
         circleView(circleRadius: Double(sliderView.value) * (22.63))
         
@@ -163,7 +211,7 @@ class MapPlacePicker: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         //cirlce = GMSCircle(position: Mapview.camera.target, radius:0)
         
         cirlce = GMSCircle(position: Mapview.camera.target, radius: circleRadius)
-        cirlce.fillColor = UIColor.blue.withAlphaComponent(0.2)
+        cirlce.fillColor = UIColor(red: 16/255, green: 129/255, blue: 224/255, alpha: 0.1)
         cirlce.map = Mapview
         
         let update = GMSCameraUpdate.fit(cirlce.bounds())
@@ -171,7 +219,183 @@ class MapPlacePicker: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         
     }
     
+    func goBack()
+    {
+        /*
+ 
+        var SBoard = UIStoryboard()
+        if isArabic{
+            SBoard = UIStoryboard(name: "Main_Arabic", bundle: nil)
+        }
+        else{
+            SBoard = UIStoryboard(name: "Main", bundle: nil)
+        }
+        let SWRevealViewController = SBoard.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+        self.present(SWRevealViewController, animated: true, completion: nil)
+ 
+         */
+ 
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func getAreaDetails(lat: CLLocationDegrees,long:CLLocationDegrees)
+    {
+        let ceo: CLGeocoder = CLGeocoder()
+        let loc: CLLocation = CLLocation(latitude: lat, longitude: long)
+        
+       
+        
+        ceo.reverseGeocodeLocation(loc) { (placeMarks, error) in
+            
+            
+            
+            if (error != nil)
+            {
+                print("reverse Geocode failed")
+                return
+            }
+            else
+            {
+                
+                
+                let tempplacemark = placeMarks
+                
+                let placemark = tempplacemark?.first
+                
+                print(placemark)
+                
+                latitude_global =  Double(lat)
+                longitude_global = Double(long)
+                
+                country_global = placemark?.country
+                city_global = placemark?.locality
+                
+                
+                udefault.set(latitude_global, forKey: "latitude_global")
+                udefault.set(longitude_global, forKey: "longitude_global")
+                udefault.set(country_global, forKey: "country_global")
+                udefault.set(city_global, forKey: "city_global")
+                
+                print(latitude_global)
+                print(longitude_global)
+                
+                /*
+                 
+                 let pm = placeMarks! as [CLPlacemark]
+                 
+                 
+                 
+                 if(pm.count > 0)
+                 {
+                 
+                    let temppm = pm[0]
+                 
+                    print(temppm.country)
+                 
+                    print(temppm.locality)
+                 
+                    //var placemark : CLPlacemark!
+                 
+                    //placemark = placeMarks?[0]
+                    //print(placemark.addressDictionary!)
+                 
+                 
+                    latitude_global =  Double(lat)
+                    longitude_global = Double(long)
+                 
+                    country_global = temppm.country
+                    city_global = temppm.locality
+                 
+                 
+                    udefault.set(latitude_global, forKey: "latitude_global")
+                    udefault.set(longitude_global, forKey: "longitude_global")
+                    udefault.set(country_global, forKey: "country_global")
+                    udefault.set(city_global, forKey: "city_global")
+                 
+                 }
+                 */
+                
+            }
+            
+        }
+        
+        
+        
+    }
    
+    @IBAction func btnDone(_ sender: Any) {
+        
+        let tempUserid = udefault.value(forKey: MUserID) as! String
+        
+        let tempToken =  udefault.value(forKey: MUserToken) as! String
+        
+        var  tempCatId = String()
+        
+        if udefault.object(forKey: MCategoryID) != nil{
+            tempCatId = udefault.object(forKey: MCategoryID) as! String
+            
+        }
+        else{
+            tempCatId = ""
+        }
+        
+        let parameters:[String:Any] = ["user_id" : tempUserid,
+                      "token" :tempToken,
+                      "country_id" : "",
+                      "city_id" : "",
+                      "latitude" : latitude_global!,
+                      "longitude" : longitude_global!,
+                      "category_id" : tempCatId,
+                      "radius": radius_global]
+        print(parameters)
+        
+        let headers: HTTPHeaders = [ "Accept": "text/html", "Content-Type" : "application/x-www-form-urlencoded" ]
+        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
+        Alamofire.request(getPost, method: .post, parameters: parameters, encoding: URLEncoding.httpBody, headers: headers).validate().responseJSON { (response:DataResponse<Any>) in
+            
+            print(response.result.value)
+            
+            
+            switch(response.result) {
+            case .success(_):
+                if response.result.value != nil{
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    
+                    let tempDic = response.result.value as! NSDictionary
+                    print("Response is:\(tempDic)")
+                    let strStatus = NSString(string: tempDic["status"] as! String)
+                    
+                    if (strStatus.isEqual(to: "success"))
+                    {
+                        var SBoard = UIStoryboard()
+                        if isArabic{
+                            SBoard = UIStoryboard(name: "Main_Arabic", bundle: nil)
+                        }
+                        else{
+                            SBoard = UIStoryboard(name: "Main", bundle: nil)
+                        }
+                        
+                            let SWRevealViewController = SBoard.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+                        
+                            self.present(SWRevealViewController, animated: true, completion: nil)
+                        
+                    }
+                }
+                
+                break
+                
+            case .failure(_):
+                print("Category List error:\(response.result.error!)")
+                MBProgressHUD.hide(for: self.view, animated: true)
+                
+                break
+                
+            }
+            
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

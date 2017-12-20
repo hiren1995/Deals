@@ -31,6 +31,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
     @IBOutlet weak var btnEnglish: UIButton!
     @IBOutlet weak var btnArabic: UIButton!
     
+    @IBOutlet weak var lblSelectLocation: UILabel!
+    
+    @IBOutlet weak var lblDealsNear: UILabel!
+    
     @IBOutlet weak var lblNoProduct: UILabel!
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var textSearch: UITextField!
@@ -108,9 +112,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
             locationManager.startUpdatingLocation()
         }
         
+        
         //Filter PopUp
-        viewCity.setBorder()
-        viewCountry.setBorder()
+        
+        //viewCity.setBorder()
+        //viewCountry.setBorder()
         viewButtons.setBorder()
         self.viewFilter.isHidden = true
         self.viewAlpha.isHidden = true
@@ -118,6 +124,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
         self.viewAlpha.addGestureRecognizer(gesture)
         
         //Display Filer data if Available
+        /*
         if udefault.object(forKey: MCountryName) != nil{
             textCountry.text = udefault.object(forKey: MCountryName) as? String
             strType = "Filter"
@@ -125,6 +132,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
         if udefault.object(forKey: MCityName) != nil{
             textCity.text = udefault.object(forKey: MCityName) as? String
         }
+ 
+         */
         
         self.getPostData()
         
@@ -138,6 +147,35 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
         layout.numberOfColumns = 2
         
         dataCollection.collectionViewLayout.invalidateLayout()
+        
+        
+        if(udefault.value(forKey: "city_global") != nil && udefault.value(forKey: "country_global") != nil)
+        {
+            print(udefault.value(forKey: "city_global"))
+            print(String(describing: udefault.value(forKey: "country_global")))
+            
+            lblSelectLocation.text = String(describing: udefault.value(forKey: "city_global")!) + " , " + String(describing: udefault.value(forKey: "country_global")!)
+            
+            if isArabic
+            {
+                lblDealsNear.text = " صفقات بالقرب " + String(describing: udefault.value(forKey: "city_global")!)
+            }
+            else
+            {
+                lblDealsNear.text = "Deals Near " + String(describing: udefault.value(forKey: "city_global")!)
+            }
+            
+        }
+        
+        let tapAction = UITapGestureRecognizer(target: self, action: #selector(gotoMap))
+        lblSelectLocation.isUserInteractionEnabled = true
+        lblSelectLocation.addGestureRecognizer(tapAction)
+        
+        lblSelectLocation.layer.borderWidth = 1
+        lblSelectLocation.layer.borderColor = UIColor(red: 73/255, green: 172/255, blue: 77/255, alpha: 1.0).cgColor
+        
+        
+        
 }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -189,6 +227,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
         var tempCatId = String()
          if udefault.object(forKey: MCategoryID) != nil{
             tempCatId = udefault.object(forKey: MCategoryID) as! String
+            
         }
          else{
             tempCatId = ""
@@ -211,20 +250,74 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
                 tempCityId = ""
             }
             
-            parameters = ["user_id" : tempUserid,
-                          "token" :tempToken,
-                          "country_id" : tempCountryId,
-                          "city_id" : tempCityId,
-                          "latitude" : "22.3072",
-                          "longitude" : "73.1812",
-                          "category_id" : tempCatId]
+            //parameters = ["user_id" : tempUserid,
+            //             "token" :tempToken,
+            //              "country_id" : tempCountryId,
+            //              "city_id" : tempCityId,
+            //              "latitude" : "22.3072",
+            //              "longitude" : "73.1812",
+            //              "category_id" : tempCatId]
+            
+            if(udefault.value(forKey: "latitude_global") != nil && udefault.value(forKey: "longitude_global") != nil )
+            {
+                parameters = ["user_id" : tempUserid,
+                              "token" :tempToken,
+                              "country_id" : "",
+                              "city_id" : "",
+                              "latitude" : udefault.value(forKey: "latitude_global"),
+                              "longitude" :  udefault.value(forKey: "longitude_global"),
+                              "category_id" : tempCatId,
+                              "radius": radius_global]
+            }
+            else
+            {
+                parameters = ["user_id" : tempUserid,
+                              "token" :tempToken,
+                              "country_id" : "",
+                              "city_id" : "",
+                              "latitude" : udefault.value(forKey: "UserLat"),
+                              "longitude" :  udefault.value(forKey: "UserLongi"),
+                              "category_id" : tempCatId,
+                              "radius": radius_global]
+            }
+            
+            
         }
         else{
-            parameters = ["user_id" : tempUserid,
-                          "token" :tempToken,
-                          "latitude" : "22.3072",
-                          "longitude" : "73.1812",
-                          "category_id" : tempCatId]
+            
+            //parameters = ["user_id" : tempUserid,
+            //              "token" :tempToken,
+            //            "latitude" : "22.3072",
+            //              "longitude" : "73.1812",
+            //              "category_id" : tempCatId]
+            
+            
+            if(udefault.value(forKey: "latitude_global") != nil && udefault.value(forKey: "longitude_global") != nil )
+            {
+                parameters = ["user_id" : tempUserid,
+                              "token" :tempToken,
+                              "country_id" : "",
+                              "city_id" : "",
+                              "latitude" : udefault.value(forKey: "latitude_global"),
+                              "longitude" :  udefault.value(forKey: "longitude_global"),
+                              "category_id" : tempCatId,
+                              "radius": radius_global]
+            }
+            else
+            {
+                parameters = ["user_id" : tempUserid,
+                              "token" :tempToken,
+                              "country_id" : "",
+                              "city_id" : "",
+                              "latitude" : udefault.value(forKey: "UserLat"),
+                              "longitude" :  udefault.value(forKey: "UserLongi"),
+                              "category_id" : tempCatId,
+                              "radius": radius_global]
+            }
+            
+            
+            print(parameters)
+            
         }
         
         let headers: HTTPHeaders = [ "Accept": "text/html", "Content-Type" : "application/x-www-form-urlencoded" ]
@@ -232,6 +325,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
         MBProgressHUD.showAdded(to: self.view, animated: true)
         
         Alamofire.request(getPost, method: .post, parameters: parameters, encoding: URLEncoding.httpBody, headers: headers).validate().responseJSON { (response:DataResponse<Any>) in
+            
+            print(response.result.value)
             
             switch(response.result) {
             case .success(_):
@@ -339,6 +434,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
     }
     
     @IBAction func clearFilter(_ sender: Any) {
+        
+        /*
         udefault.removeObject(forKey: MCategoryID)
         udefault.removeObject(forKey: MCountryID)
         udefault.removeObject(forKey: MCityyID)
@@ -351,6 +448,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
         textCity.text = ""
         self.dataCollection.isHidden = true
         self.getPostData()
+        */
+        var SBoard = UIStoryboard()
+        if isArabic{
+            SBoard = UIStoryboard(name: "Main_Arabic", bundle: nil)
+        }
+        else{
+            SBoard = UIStoryboard(name: "Main", bundle: nil)
+        }
+        let mapPlacePicker = SBoard.instantiateViewController(withIdentifier: "mapPlacePicker") as! MapPlacePicker
+        self.present(mapPlacePicker, animated: true, completion: nil)
+        
     }
     
     @IBAction func englishSelcted(_ sender: Any) {
@@ -732,6 +840,24 @@ extension ViewController: PinterestLayoutDelegate {
                         withWidth: CGFloat) -> CGFloat {
         //  let textFont = UIFont(name: "Arial-ItalicMT", size: 11)!
         return 70.0
+    }
+    
+    func gotoMap()
+    {
+        
+        var SBoard = UIStoryboard()
+        if isArabic{
+            SBoard = UIStoryboard(name: "Main_Arabic", bundle: nil)
+        }
+        else{
+            SBoard = UIStoryboard(name: "Main", bundle: nil)
+        }
+       
+            let mapPlacePicker = SBoard.instantiateViewController(withIdentifier: "mapPlacePicker") as! MapPlacePicker
+        
+            self.present(mapPlacePicker, animated: true, completion: nil)
+       
+        
     }
 }
 

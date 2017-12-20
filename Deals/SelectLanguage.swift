@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import GoogleMaps
 
-class SelectLanguage: UIViewController {
+class SelectLanguage: UIViewController,CLLocationManagerDelegate {
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+   
     
     //MARK: - IBAction Methods
     
