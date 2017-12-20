@@ -182,9 +182,15 @@ class MenuView: UIViewController, UITableViewDataSource, UITableViewDelegate {
             udefault.removeObject(forKey: MUserLatitude)
             udefault.removeObject(forKey: MUserLongitude)
             udefault.removeObject(forKey: MCategoryID)
+            
             udefault.removeObject(forKey: "Login")
             udefault.removeObject(forKey: "latitude_global")
             udefault.removeObject(forKey: "longitude_global")
+            udefault.removeObject(forKey: "address_post")
+            udefault.removeObject(forKey: "country_post")
+            udefault.removeObject(forKey: "city_post")
+            udefault.removeObject(forKey: "city_global")
+            udefault.removeObject(forKey: "country_global")
             
             let langView = sBoard.instantiateViewController(withIdentifier: "LanguageView") as! SelectLanguage
             self.present(langView, animated: true, completion: nil)

@@ -17,6 +17,8 @@ let arBoard = UIStoryboard(name: "Main_Arabic", bundle: nil)
 var isArabic : Bool = false
 
 
+
+
  //Api
 
 var Baseurl = "http://deal4ya.com/api"

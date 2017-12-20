@@ -10,6 +10,8 @@ import UIKit
 import Alamofire
 import MBProgressHUD
 
+
+
 class AddPost: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIScrollViewDelegate {
 
     @IBOutlet weak var imgView: UIImageView!
@@ -25,6 +27,7 @@ class AddPost: UIViewController, UITextFieldDelegate, UINavigationControllerDele
     @IBOutlet weak var viewCategory: UIView!
     @IBOutlet weak var viewCountry: UIView!
     @IBOutlet weak var viewCity: UIView!
+    @IBOutlet weak var viewAddress: UIView!
     
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var imageDetailsView: UIView!
@@ -54,14 +57,31 @@ class AddPost: UIViewController, UITextFieldDelegate, UINavigationControllerDele
         viewCategory.setBorder()
         viewCountry.setBorder()
         viewCity.setBorder()
+        viewAddress.setBorder()
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+
+        /*
+        if(udefault.value(forKey: "address_post") != nil && udefault.value(forKey: "city_post") != nil && udefault.value(forKey: "country_post") != nil)
+        {
+            print(String(describing: udefault.value(forKey: "address_post")))
+         
+            textAddress.text = String(describing: udefault.value(forKey: "address_post")!)
+            textCountry.text =  String(describing: udefault.value(forKey: "country_post")!)
+            textCity.text = String(describing: udefault.value(forKey: "city_post")!)
+        }
+         */
         
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+     
         self.getTempData()
+        
     }
     
     func setScrollView(){
@@ -162,6 +182,9 @@ class AddPost: UIViewController, UITextFieldDelegate, UINavigationControllerDele
     
     @IBAction func cityClicked(_ sender: Any) {
         
+       
+        
+        /*
         if textCountry.text == ""{
             self.showAlert("Please Select Country First")
         }
@@ -179,6 +202,7 @@ class AddPost: UIViewController, UITextFieldDelegate, UINavigationControllerDele
             cityList.cityArray = udefault.object(forKey: "TempCityArray") as! NSArray
             self.present(cityList, animated: true, completion: nil)
         }
+        */
     }
     
     @IBAction func categoryClicked(_ sender: Any) {
@@ -194,7 +218,25 @@ class AddPost: UIViewController, UITextFieldDelegate, UINavigationControllerDele
         self.present(catList, animated: true, completion: nil)
     }
 
+    @IBAction func addressClicked(_ sender: Any) {
+        
+        var SBoard = UIStoryboard()
+        if isArabic{
+            SBoard = UIStoryboard(name: "Main_Arabic", bundle: nil)
+        }
+        else{
+            SBoard = UIStoryboard(name: "Main", bundle: nil)
+        }
+        let mapItemPost = SBoard.instantiateViewController(withIdentifier: "mapItemPost") as! MapItemPost
+        
+        self.present(mapItemPost, animated: true, completion: nil)
+        
+        
+    }
     @IBAction func countryClicked(_ sender: Any) {
+        
+        /*
+        
         self.saveTempData()
         var SBoard = UIStoryboard()
         if isArabic{
@@ -206,6 +248,8 @@ class AddPost: UIViewController, UITextFieldDelegate, UINavigationControllerDele
         let countryList = SBoard.instantiateViewController(withIdentifier: "countryCity") as! CountryCityList
         countryList.strType = "Country"
         self.present(countryList, animated: true, completion: nil)
+ 
+        */
     }
     
     @IBAction func postData(_ sender: Any) {
@@ -324,10 +368,17 @@ class AddPost: UIViewController, UITextFieldDelegate, UINavigationControllerDele
         udefault.set(textTitle.text, forKey: "TempTitle")
         udefault.set(textDesciption.text, forKey: "TempDesc")
         udefault.set(textPrice.text, forKey: "TempPrice")
-        udefault.set(textAddress.text, forKey: "TempAddress")
+        
+        //udefault.set(textAddress.text, forKey: "TempAddress")
+        
+        //udefault.set(textCountry.text, forKey: "TempCountry")
+        //udefault.set(textCity.text, forKey: "TempCity")
+        
+        udefault.set(String(describing: udefault.value(forKey: "address_post")!), forKey: "TempAddress")
+        udefault.set(String(describing: udefault.value(forKey: "country_post")!), forKey: "TempCountry")
+        udefault.set(String(describing: udefault.value(forKey: "city_post")!), forKey: "TempCountry")
+        
         udefault.set(textCategory.text, forKey: "TempCategory")
-        udefault.set(textCountry.text, forKey: "TempCountry")
-        udefault.set(textCity.text, forKey: "TempCity")
         udefault.set(strCategoryID, forKey: "TempCatID")
     }
     
@@ -336,10 +387,15 @@ class AddPost: UIViewController, UITextFieldDelegate, UINavigationControllerDele
         textTitle.text = udefault.object(forKey: "TempTitle") as? String
         textDesciption.text = udefault.object(forKey: "TempDesc") as? String
         textPrice.text = udefault.object(forKey: "TempPrice") as? String
-        textAddress.text = udefault.object(forKey: "TempAddress") as? String
         textCategory.text = udefault.object(forKey: "TempCategory") as? String
-        textCountry.text = udefault.object(forKey: "TempCountry") as? String
-        textCity.text = udefault.object(forKey: "TempCity") as? String
+        //textAddress.text = udefault.object(forKey: "TempAddress") as? String
+        //textCountry.text = udefault.object(forKey: "TempCountry") as? String
+        //textCity.text = udefault.object(forKey: "TempCity") as? String
+        
+        textAddress.text = udefault.object(forKey: "address_post") as? String
+        textCountry.text = udefault.object(forKey: "country_post") as? String
+        textCity.text = udefault.object(forKey: "city_post") as? String
+        
       
         if udefault.object(forKey: "TempCatID") != nil{
             strCategoryID = (udefault.object(forKey: "TempCatID") as? NSString)!

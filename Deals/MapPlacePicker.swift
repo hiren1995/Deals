@@ -71,6 +71,8 @@ class MapPlacePicker: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         
         btnGPSlocation.addTarget(self, action: #selector(curreentLocation), for: .touchUpInside)
         
+        curreentLocation()
+       
         //Mapview.camera = GMSCameraPosition.camera(withLatitude: -33.86,longitude: 151.20, zoom: 18)
         //Mapview.isMyLocationEnabled = true
         //Mapview.delegate = self
@@ -132,7 +134,7 @@ class MapPlacePicker: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     override func viewDidAppear(_ animated: Bool) {
         
         
-        curreentLocation()
+        //curreentLocation()
     }
     
     func curreentLocation()
@@ -140,9 +142,10 @@ class MapPlacePicker: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        //locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.startUpdatingLocation()
         
-        locationManager.stopUpdatingLocation()
+        //locationManager.stopUpdatingLocation()
         
     }
     
@@ -158,11 +161,11 @@ class MapPlacePicker: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         
         print(sliderView.value)
         
-        circleView(circleRadius: Double(sliderView.value) * (22.63))
+        circleView(circleRadius: Double(sliderView.value) * (1604))
         
         //circleView(circleRadius: Double(sliderView.value))
         
-        
+        locationManager.stopUpdatingLocation()
     }
     
     
@@ -198,7 +201,7 @@ class MapPlacePicker: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         }
         
         
-        circleView(circleRadius: Double(sliderView.value) * (22.63))
+        circleView(circleRadius: Double(sliderView.value) * (1604))
         
         //circleView(circleRadius: Double(sliderView.value))
         
@@ -240,6 +243,49 @@ class MapPlacePicker: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     
     func getAreaDetails(lat: CLLocationDegrees,long:CLLocationDegrees)
     {
+        
+        var CLCoordinate:CLLocationCoordinate2D = CLLocationCoordinate2D()
+        
+        CLCoordinate.latitude = lat
+        CLCoordinate.longitude = long
+        
+        let ceo = GMSGeocoder()
+        
+        ceo.reverseGeocodeCoordinate(CLCoordinate) { (response, error) in
+            
+            //print(response?.results())
+            
+            print(response?.firstResult())
+            
+            if (error != nil)
+            {
+                print("reverse Geocode failed")
+                
+                return
+            }
+            else
+            {
+                
+                
+                latitude_global =  Double(lat)
+                longitude_global = Double(long)
+                
+                country_global = response?.firstResult()?.country
+                city_global = response?.firstResult()?.locality
+                
+                
+                udefault.set(latitude_global, forKey: "latitude_global")
+                udefault.set(longitude_global, forKey: "longitude_global")
+                udefault.set(country_global, forKey: "country_global")
+                udefault.set(city_global, forKey: "city_global")
+                
+                print(latitude_global)
+                print(longitude_global)
+            }
+        }
+
+        /*  //--------------- Apple Reverse Geo Coding...-------
+        
         let ceo: CLGeocoder = CLGeocoder()
         let loc: CLLocation = CLLocation(latitude: lat, longitude: long)
         
@@ -319,7 +365,7 @@ class MapPlacePicker: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
             
         }
         
-        
+        */
         
     }
    
