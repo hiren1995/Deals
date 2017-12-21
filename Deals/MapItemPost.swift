@@ -29,10 +29,6 @@ class MapItemPost: UIViewController,CLLocationManagerDelegate,GMSMapViewDelegate
     
     @IBOutlet weak var lbAddress: UILabel!
     
-    @IBOutlet weak var lblCity: UILabel!
-    
-    @IBOutlet weak var lblCountry: UILabel!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,6 +47,8 @@ class MapItemPost: UIViewController,CLLocationManagerDelegate,GMSMapViewDelegate
 
     func curreentLocation()
     {
+        
+        
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -100,17 +98,15 @@ class MapItemPost: UIViewController,CLLocationManagerDelegate,GMSMapViewDelegate
             {
                 print("reverse Geocode failed")
                 
-                self.lblCity.text = nil
-                self.lblCountry.text = nil
+                
                 self.lbAddress.text = nil
                 
                 return
             }
             else
             {
-                self.lblCity.text = response?.firstResult()?.locality
-                self.lblCountry.text = response?.firstResult()?.country
-                self.lbAddress.text = response?.firstResult()?.subLocality
+                let strrep = response?.firstResult()?.lines?.joined()
+                self.lbAddress.text = strrep
                 
                 udefault.set(response?.firstResult()?.subLocality, forKey: "address_post")
                 udefault.set(response?.firstResult()?.locality, forKey: "city_post")

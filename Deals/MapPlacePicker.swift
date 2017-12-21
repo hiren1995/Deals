@@ -57,11 +57,16 @@ class MapPlacePicker: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     
     //var mapView: GMSMapView!
     
+    
+    @IBOutlet weak var lblCity: UILabel!
+    
    
     @IBOutlet var distancelabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 
         btnCancel.layer.borderWidth = 1
         btnCancel.layer.borderColor = UIColor(red: 73/255, green: 172/255, blue: 77/255, alpha: 1.0).cgColor
@@ -139,6 +144,8 @@ class MapPlacePicker: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     
     func curreentLocation()
     {
+        Mapview.clear()
+        
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -214,7 +221,9 @@ class MapPlacePicker: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         //cirlce = GMSCircle(position: Mapview.camera.target, radius:0)
         
         cirlce = GMSCircle(position: Mapview.camera.target, radius: circleRadius)
-        cirlce.fillColor = UIColor(red: 16/255, green: 129/255, blue: 224/255, alpha: 0.1)
+        cirlce.fillColor = UIColor(red: 75/255, green: 175/255, blue: 77/255, alpha: 0.2)
+        cirlce.strokeColor = UIColor(red: 75/255, green: 175/255, blue: 77/255, alpha: 1.0)
+    
         cirlce.map = Mapview
         
         let update = GMSCameraUpdate.fit(cirlce.bounds())
@@ -272,6 +281,8 @@ class MapPlacePicker: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
                 
                 country_global = response?.firstResult()?.country
                 city_global = response?.firstResult()?.locality
+                
+                self.lblCity.text = response?.firstResult()?.locality
                 
                 
                 udefault.set(latitude_global, forKey: "latitude_global")
