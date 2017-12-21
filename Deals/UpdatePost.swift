@@ -307,6 +307,7 @@ class UpdatePost: UIViewController,UITextFieldDelegate, UINavigationControllerDe
                 let tempUserid = udefault.value(forKey: MUserID) as! String
                 let tempToken =  udefault.value(forKey: MUserToken) as! String
                 
+                /*
                 
                 var CountryID =  String()
                 if udefault.object(forKey: "TempCountryID") != nil{
@@ -338,6 +339,22 @@ class UpdatePost: UIViewController,UITextFieldDelegate, UINavigationControllerDe
                                                "latitude" : "22.3072",
                                                "longitude" : "73.1812",
                                                "post_id" : strPostId]
+                 */
+                
+                let parameters : Parameters = ["user_id" : tempUserid,
+                                               "token" :tempToken,
+                                               "post_title" : textTitle.text!.encodeString,
+                                               "location" : textAddress.text!.encodeString,
+                                               "post_desc" : textDesciption.text!.encodeString,
+                                               "price" : textPrice.text!,
+                                               "category_id" : strCategoryID,
+                                               "country" : udefault.value(forKey: "country_post")!,
+                                               "city" : udefault.value(forKey: "city_post")!,
+                                               "latitude" : String(describing: udefault.value(forKey: "lat_post")!),
+                                               "longitude" : String(describing: udefault.value(forKey: "long_post")!),
+                                                "post_id" : strPostId]
+                
+                print(parameters)
                 
                 let headers: HTTPHeaders = [ "Accept": "text/html", "Content-Type" : "application/x-www-form-urlencoded" ]
                 
@@ -457,6 +474,10 @@ class UpdatePost: UIViewController,UITextFieldDelegate, UINavigationControllerDe
         udefault.removeObject(forKey: "TempCatID")
         udefault.removeObject(forKey: "TempCountryID")
         udefault.removeObject(forKey: "TempCityID")
+        
+        udefault.removeObject(forKey: "address_post")
+        udefault.removeObject(forKey: "country_post")
+        udefault.removeObject(forKey: "city_post")
     }
     
     func goToHome(){

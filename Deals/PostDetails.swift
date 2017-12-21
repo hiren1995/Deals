@@ -136,14 +136,34 @@ class PostDetails: UIViewController, UIScrollViewDelegate {
             let tempCategory = dataArray.object(forKey: "category_arabic") as? String
             lblCategory.text = tempCategory?.decodeString
             
-            lblCountryCity.text = (dataArray.object(forKey: "country_arabic") as? String)! + ", " + (dataArray.object(forKey: "city_arabic") as? String)!
+            //lblCountryCity.text = (dataArray.object(forKey: "country_arabic") as? String)! + ", " + (dataArray.object(forKey: "city_arabic") as? String)!
+            
+            if let x = dataArray.object(forKey: "country") as? NSNull
+            {
+               return
+            }
+            else
+            {
+                 lblCountryCity.text = (dataArray.object(forKey: "country") as? String)! + ", " + (dataArray.object(forKey: "city") as? String)!
+            }
+            
+            
         }
         else
         {
             let tempCategory = dataArray.object(forKey: "category_name") as? String
             lblCategory.text = tempCategory?.decodeString
             
-            lblCountryCity.text = (dataArray.object(forKey: "country_english") as? String)! + ", " + (dataArray.object(forKey: "city_english") as? String)!
+            //lblCountryCity.text = (dataArray.object(forKey: "country_english") as? String)! + ", " + (dataArray.object(forKey: "city_english") as? String)!
+            
+            if let x = dataArray.object(forKey: "country") as? NSNull
+            {
+                return
+            }
+            else
+            {
+                lblCountryCity.text = (dataArray.object(forKey: "country") as? String)! + ", " + (dataArray.object(forKey: "city") as? String)!
+            }
         }
         
     }

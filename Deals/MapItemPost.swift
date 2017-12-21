@@ -108,9 +108,11 @@ class MapItemPost: UIViewController,CLLocationManagerDelegate,GMSMapViewDelegate
                 let strrep = response?.firstResult()?.lines?.joined()
                 self.lbAddress.text = strrep
                 
-                udefault.set(response?.firstResult()?.subLocality, forKey: "address_post")
+                udefault.set(strrep, forKey: "address_post")
                 udefault.set(response?.firstResult()?.locality, forKey: "city_post")
                 udefault.set(response?.firstResult()?.country, forKey: "country_post")
+                udefault.set(lat, forKey: "lat_post")
+                udefault.set(long, forKey: "long_post")
             }
         }
 
