@@ -18,6 +18,7 @@ pod 'JSQMessagesViewController'
 pod 'Firebase/Core'
 pod 'Firebase/Messaging'
 pod 'PinterestLayout'
+pod 'Google-Mobile-Ads-SDK'
 
 
 

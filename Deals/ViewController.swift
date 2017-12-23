@@ -12,9 +12,13 @@ import MBProgressHUD
 import AlamofireImage
 import CoreLocation
 import PinterestLayout
+import GoogleMobileAds
 
 class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    var interstitial: GADInterstitial!
+    
+    
     @IBOutlet weak var btnMenu: UIButton!
     @IBOutlet weak var btnNotification: UIButton!
     @IBOutlet weak var menuView: UIView!
@@ -57,6 +61,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3972794215660481/8637476531")
+        let request = GADRequest()
+        interstitial.load(request)
+        
+        if interstitial.isReady {
+            interstitial.present(fromRootViewController: self)
+        } else {
+            print("Ad wasn't ready")
+        }
+        
         // Do any additional setup after loading the view, typically from a nib.
         searchView.isHidden = true
         textSearch.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
@@ -168,15 +183,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
         }
         
         let tapAction = UITapGestureRecognizer(target: self, action: #selector(gotoMap))
+        
+        //lblSelectLocation.frame = CGRect(x: 13, y: 30, width: 204, height: 44)
         lblSelectLocation.isUserInteractionEnabled = true
         lblSelectLocation.addGestureRecognizer(tapAction)
         
-        lblSelectLocation.layer.borderWidth = 1
-        lblSelectLocation.layer.borderColor = UIColor(red: 73/255, green: 172/255, blue: 77/255, alpha: 1.0).cgColor
+        //lblSelectLocation.layer.borderWidth = 1
+        //lblSelectLocation.layer.borderColor = UIColor(red: 73/255, green: 172/255, blue: 77/255, alpha: 1.0).cgColor
         
-        
+        lblSelectLocation.setBorder()
         
 }
+    override func viewDidAppear(_ animated: Bool) {
+        
+       
+    }
     
     override func viewWillAppear(_ animated: Bool) {
        // self.getPostData()

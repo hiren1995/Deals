@@ -910,8 +910,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Deals/Deals.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tareaf Albarmawi (J7EFJ74S6T)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tareaf Albarmawi (J7EFJ74S6T)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tareaf Albarmawi (5D6D97Q67Z)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tareaf Albarmawi (5D6D97Q67Z)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5D6D97Q67Z;
 				INFOPLIST_FILE = Deals/Info.plist;
@@ -919,8 +919,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Deal.Deals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6cf5ad9d-0850-4627-8a8e-2da341a28139";
-				PROVISIONING_PROFILE_SPECIFIER = Deals_Provision;
+				PROVISIONING_PROFILE = "3b46fd7d-25bf-43ba-b206-bfa350aa62e2";
+				PROVISIONING_PROFILE_SPECIFIER = AppstoreDeals;
 				SWIFT_OBJC_BRIDGING_HEADER = "Deals-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -935,8 +935,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Deals/Deals.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tareaf Albarmawi (J7EFJ74S6T)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tareaf Albarmawi (J7EFJ74S6T)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tareaf Albarmawi (5D6D97Q67Z)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tareaf Albarmawi (5D6D97Q67Z)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5D6D97Q67Z;
 				INFOPLIST_FILE = Deals/Info.plist;
@@ -944,8 +944,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Deal.Deals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6cf5ad9d-0850-4627-8a8e-2da341a28139";
-				PROVISIONING_PROFILE_SPECIFIER = Deals_Provision;
+				PROVISIONING_PROFILE = "3b46fd7d-25bf-43ba-b206-bfa350aa62e2";
+				PROVISIONING_PROFILE_SPECIFIER = AppstoreDeals;
 				SWIFT_OBJC_BRIDGING_HEADER = "Deals-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
