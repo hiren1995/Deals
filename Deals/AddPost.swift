@@ -220,6 +220,8 @@ class AddPost: UIViewController, UITextFieldDelegate, UINavigationControllerDele
 
     @IBAction func addressClicked(_ sender: Any) {
         
+        saveTempData()
+        
         var SBoard = UIStoryboard()
         if isArabic{
             SBoard = UIStoryboard(name: "Main_Arabic", bundle: nil)

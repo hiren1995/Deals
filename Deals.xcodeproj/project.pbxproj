@@ -919,8 +919,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Deal.Deals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3b46fd7d-25bf-43ba-b206-bfa350aa62e2";
-				PROVISIONING_PROFILE_SPECIFIER = AppstoreDeals;
+				PROVISIONING_PROFILE = "6cf5ad9d-0850-4627-8a8e-2da341a28139";
+				PROVISIONING_PROFILE_SPECIFIER = Deals_Provision;
 				SWIFT_OBJC_BRIDGING_HEADER = "Deals-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -944,8 +944,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Deal.Deals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3b46fd7d-25bf-43ba-b206-bfa350aa62e2";
-				PROVISIONING_PROFILE_SPECIFIER = AppstoreDeals;
+				PROVISIONING_PROFILE = "6cf5ad9d-0850-4627-8a8e-2da341a28139";
+				PROVISIONING_PROFILE_SPECIFIER = Deals_Provision;
 				SWIFT_OBJC_BRIDGING_HEADER = "Deals-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
